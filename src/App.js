@@ -22,20 +22,32 @@ class App extends React.Component{
     })
   }
 
+  submitHandler = toyObj => {
+    this.setState(() => ({
+      toys: [toyObj, ...this.state.toys]
+    }))
+  }
+
+  removeToy = toyObj => {
+    this.setState(() => ({
+      toys: this.state.toys.filter(toy => toy !== toyObj)
+    }))
+  }
+
   render(){
     return (
       <>
         <Header/>
         { this.state.display
             ?
-          <ToyForm/>
+          <ToyForm submitHandler={this.submitHandler}/>
             :
           null
         }
         <div className="buttonContainer">
           <button onClick={this.handleClick}> Add a Toy </button>
         </div>
-        <ToyContainer toys={this.state.toys}/>
+        <ToyContainer toys={this.state.toys} removeToy={this.removeToy}/>
       </>
     );
   }
