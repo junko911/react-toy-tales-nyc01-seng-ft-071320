@@ -3,7 +3,7 @@ import ToyCard from './ToyCard'
 
 const ToyContainer = (props) => {
 
-  const toyCards = () => props.toys.map(toy => <ToyCard key={toy.id} toy={toy} removeToy={props.removeToy}/>)
+  const toyCards = () => props.toys.map(toy => <ToyCard key={toy.id} toy={toy} removeToy={props.removeToy} addLike={props.addLike}/>)
 
   return(
     <div id="toy-collection">
