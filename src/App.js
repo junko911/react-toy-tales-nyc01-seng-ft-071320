@@ -23,15 +23,34 @@ class App extends React.Component{
   }
 
   submitHandler = toyObj => {
-    this.setState(() => ({
-      toys: [toyObj, ...this.state.toys]
-    }))
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accepts: "application/json"
+      },
+      body: JSON.stringify(toyObj)
+    }
+    fetch("http://localhost:3000/toys", options)
+    .then(res => res.json())
+    .then(newObj => {
+      this.setState(() => ({
+        toys: [newObj, ...this.state.toys]
+      }))
+    })
   }
 
   removeToy = toyObj => {
-    this.setState(() => ({
-      toys: this.state.toys.filter(toy => toy !== toyObj)
-    }))
+    const options = {
+      method: "DELETE"
+    }
+    fetch(`http://localhost:3000/toys/${toyObj.id}`, options)
+    // .then(res => res.json())
+    // .then(deleteObj => {
+      this.setState(() => ({
+        toys: this.state.toys.filter(toy => toy !== toyObj)
+      }))
+    // })
   }
 
   render(){
